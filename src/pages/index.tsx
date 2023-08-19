@@ -14,7 +14,7 @@ export default function Home() {
         <title>Rick's Pizza - Faça seu login</title>
       </Head>
       <div className={styles.containerCenter}>
-        <Image src={logo} alt="Rick's Pizza" />
+        <Image className={styles.image} src={logo} alt="Rick's Pizza" />
 
         <div className={styles.login}>
           <form>
@@ -30,6 +30,10 @@ export default function Home() {
             </Button>
             
           </form>
+
+          <a className={styles.text}>
+            Nao possui uma conta? Cadastre-se
+          </a>
         </div>
       </div>
     </>
