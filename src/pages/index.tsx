@@ -1,24 +1,25 @@
-import { useContext, FormEvent, useState } from "react";
-import Head from "next/head";
-import logo from "../../public/Pizzaria.png";
+import { useContext, FormEvent, useState } from 'react'
 
-import Image from "next/image";
+import Head from 'next/head'
+import Image from 'next/image';
+import styles from '../../styles/home.module.scss';
 
-import styles from "../../styles/home.module.scss";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+import logoImg from '../../public/logo.svg';
 
-import { AuthContext } from "../contexts/AuthContext";
+import { Input } from '../components/ui/Input'
+import { Button } from '../components/ui/Button'
 
-import Link from "next/link";
+import { AuthContext } from '../contexts/AuthContext'
+
+import Link from 'next/link';
 
 export default function Home() {
-  const {signIn } = useContext(AuthContext)
+  const { signIn } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
-  const [ password, setPassword] = useState('')
+  const [password, setPassword] = useState('');
 
-  const [ loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(event: FormEvent){
     event.preventDefault();
@@ -27,44 +28,48 @@ export default function Home() {
       email,
       password
     }
-    
+
     await signIn(data)
   }
 
   return (
     <>
-      <Head>
-        <title>Rick's Pizza - Faça seu login</title>
-      </Head>
-      <div className={styles.containerCenter}>
-        <Image className={styles.image} src={logo} alt="Rick's Pizza" />
+    <Head>
+      <title>SujeitoPizza - Faça seu login</title> 
+    </Head>
+    <div className={styles.containerCenter}>
+      <Image src={logoImg} alt="Logo Sujeito Pizzaria" />
 
-        <div className={styles.login}>
-          <form onSubmit={handleLogin}>
-            <Input 
-            placeholder="Digite seu email" 
-            type="text" 
+      <div className={styles.login}>
+        <form onSubmit={handleLogin}>
+          <Input
+            placeholder="Digite seu email"
+            type="text"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            />
+            onChange={ (e) => setEmail(e.target.value) }
+          />
 
-            <Input 
-            placeholder="Digite sua senha" 
+          <Input
+            placeholder="Sua senha"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            />
+            value={password}
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+          
+          <Button
+            type="submit"
+            loading={false}
+          >
+            Acessar
+          </Button>
+        </form>
 
-            <Button type="submit" loading={false}>
-              Cadastrar
-            </Button>
-          </form>
+        <Link href="/signup">
+           <a className={styles.text}>Nao possui uma conta? Cadastre-se</a>
+        </Link>
 
-         
-            <a href="/signup" className={styles.text}>Nao possui uma conta? Cadastre-se!</a>
-         
-
-        </div>
       </div>
+    </div>
     </>
-  );
+  )
 }
