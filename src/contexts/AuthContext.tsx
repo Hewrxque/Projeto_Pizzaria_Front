@@ -1,10 +1,15 @@
 import { createContext, ReactNode, useState } from "react";
 
+import { api } from "../services/apiClient";
+
+import {destroyCookie } from 'nookies';
+import Router from "next/router";
+
 type AuthContextData = {
     user: UserProps;
     isAuthenticated: boolean;
     signIn: (credentials: SignInProps) => Promise<void>
-    
+    signOut: () => void;
 }
 
 type UserProps = {
@@ -24,16 +29,33 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext({} as AuthContextData)
 
+export function signOut(){
+    try{
+        destroyCookie(undefined, "@nextauth.token")
+        Router.push('/')
+    }catch{
+        console.log("erro ao deslogar")
+    }
+}
+
 export function AuthProvider({children}: AuthProviderProps){
     const [ user, setUser ] = useState<UserProps>()
     const isAuthenticated = !!user;
 
-    async function signIn(){
-        alert("Clicou")
+    async function signIn({email, password}: SignInProps){
+     try{
+        const response = await api.post("/session", {
+            email,
+            password
+        })
+        console.log(response.data)
+     }catch(err){
+        console.log("erro ao acessar", err)
+     }
     }
 
     return(
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn}}>
+        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut}}>
             {children}
         </AuthContext.Provider>
     )
