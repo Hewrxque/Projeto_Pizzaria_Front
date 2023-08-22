@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image';
 import styles from '../../styles/home.module.scss';
 
-import logoImg from '../../public/logo.svg';
+import logoImg from '../../public/Pizzaria.png';
 
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
@@ -47,10 +47,10 @@ export default function Home() {
   return (
     <>
     <Head>
-      <title>SujeitoPizza - Faça seu login</title> 
+      <title>RickPizzaria - Faça seu login</title> 
     </Head>
     <div className={styles.containerCenter}>
-      <Image src={logoImg} alt="Logo Sujeito Pizzaria" />
+      <Image src={logoImg} width={200} height={200} alt="Rick Pizzaria" />
 
       <div className={styles.login}>
         <form onSubmit={handleLogin}>

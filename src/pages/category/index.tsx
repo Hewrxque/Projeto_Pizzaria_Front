@@ -32,7 +32,7 @@ export default function Category(){
   return(
     <>
     <Head>
-      <title>Nova categoria - Sujeito Pizzaria</title>
+      <title>Nova categoria - RickPizzaria</title>
     </Head>
     <div>
       <Header/>
