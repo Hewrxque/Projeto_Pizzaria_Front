@@ -1,63 +1,71 @@
-import { useState, FormEvent } from "react";
-import Head from "next/head";
-import { Header } from "../../components/Header";
-import styles from "./styles.module.scss";
+import { useState, FormEvent } from 'react'
+import Head from "next/head"
+import {Header} from '../../components/Header'
+import styles from './styles.module.scss'
 
-import { toast } from "react-toastify";
-import { setupAPIClient } from "../../services/api";
+import { setupAPIClient } from '../../services/api'
+import { toast } from 'react-toastify'
 
-import { canSSRAuth } from "../../utils/canSSRAuth";
+import { canSSRAuth } from '../../utils/canSSRAuth'
 
-export default function Category() {
-  const [name, setName] = useState("");
+export default function Category(){
+  const [name, setName] = useState('')
 
-  async function handleRegister(event: FormEvent) {
+  async function handleRegister(event: FormEvent){
     event.preventDefault();
 
-    if (name === "") {
+    if(name === ''){
       return;
     }
 
     const apiClient = setupAPIClient();
-    await apiClient.post("/category", {
-      name: name,
-    });
+    await apiClient.post('/category', {
+      name: name
+    })
 
-    toast.success("Categoria cadastrada com sucesso!");
-    setName("");
+    toast.success('Categoria cadastrada com sucesso!')
+    setName('');
+
   }
 
-  return (
+
+  return(
     <>
-      <Head>
-        <title>Nova Categoria - Rick Pizza</title>
-      </Head>
-      <div>
-        <Header />
-        <main className={styles.container}>
-          <h1> Cadastrar Categorias </h1>
+    <Head>
+      <title>Nova categoria - Sujeito Pizzaria</title>
+    </Head>
+    <div>
+      <Header/>
 
-          <form className={styles.form} onSubmit={handleRegister}>
-            <input
-              type="text"
-              placeholder="Digite o nome da categoria"
-              className={styles.input}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+      <main className={styles.container}>
+        <h1>Cadastrar categorias</h1>
 
-            <button className={styles.buttonAdd} type="submit">
-              Cadastrar
-            </button>
-          </form>
-        </main>
-      </div>
+        <form className={styles.form} onSubmit={handleRegister}>
+          <input 
+          type="text" 
+          placeholder="Digite o nome da categoria"
+          className={styles.input}
+          value={name}
+          onChange={ (e) => setName(e.target.value) }
+          />
+
+          <button className={styles.buttonAdd} type="submit">
+            Cadastrar
+          </button>
+
+        </form>
+
+      </main>
+    </div>
     </>
-  );
+  )
 }
 
+
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+
   return {
-    props: {},
-  };
-});
+    props: {}
+  }
+
+})
