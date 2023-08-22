@@ -1,4 +1,4 @@
-import { useContext  } from 'react'
+import { useContext  } from 'react';
 import styles from './styles.module.scss'
 import Link from 'next/link'
 
@@ -14,7 +14,7 @@ export function Header(){
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <Link href="/dashboard">
-          <img src="/logo.svg" width={190} height={60} />
+          <img src="/Pizzaria.png" width={60} height={60} />
         </Link>
 
         <nav className={styles.menuNav}>
