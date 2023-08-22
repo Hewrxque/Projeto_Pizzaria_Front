@@ -58,6 +58,7 @@ content:{
       </section>
     ))}
 
+<button className={styles.buttonOrder} onClick={() => {} }>Concluir pedido</button>
     </div>
 
    </Modal>
